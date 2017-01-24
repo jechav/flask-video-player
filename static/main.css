@@ -1,0 +1,13 @@
+div.logo {
+   margin-top: 40px; 
+   text-align: center;
+}
+div.url {
+    font-size: 29px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: rgb(52, 73, 94);
+    text-align: center;
+}

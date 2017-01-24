@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Video Player</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://vjs.zencdn.net/5.15.1/video-js.css">
+    <link rel="stylesheet" href="/static/main.css">
+  </head>
+  <body>
+    <section class="container">
+      <div class="video-container col-md-12">
+        <div class="url"> {{ url }}</div>
+
+        <video class="video-js vjs-default-skin" id="video-1" src="{{ url }}" type="video/mp4">
+          <!--<source src="{{ url }}">-->
+          <!--<source src="http://iurevych.github.com/Flat-UI-videos/big_buck_bunny.mp4" type="video/mp4">-->
+        </video>
+
+      </div>
+    </section>
+
+    <!--<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>-->
+    <script src="http://vjs.zencdn.net/5.15.1/video.js"></script>
+    <script src="//cdn.sc.gl/videojs-hotkeys/latest/videojs.hotkeys.min.js"></script>
+
+    <script type='text/javascript'>
+      var video = videojs("video-1", {
+        autoplay: true,
+        preload: true,
+        controls: true,
+        aspectRatio: '16:9',
+        playbackRates: [0.7, 1, 1.15, 1.25, 1.5, 2] 
+      });
+      video.ready(function() {
+        this.hotkeys({
+          volumeStep: 0.1,
+          seekStep: 5,
+          enableModifiersForNumbers: true, 
+          alwaysCaptureHotkeys: true,
+          customKeys: {
+            speedUp: {
+              key: function(event) {
+                // Toggle something with shift >
+                return (event.shiftKey && event.which === 190);
+              },
+              handler: function(player, options, event) {
+                var p = player.playbackRate();
+                var list = player.options_.playbackRates;
+                if(to = list[list.indexOf(p) + 1] ) player.playbackRate(to)
+              }
+            },
+            speedDown: {
+              key: function(event) {
+                // Toggle something with shift <
+                return (event.shiftKey && event.which === 188);
+              },
+              handler: function(player, options, event) {
+                var p = player.playbackRate();
+                var list = player.options_.playbackRates;
+                if(to = list[list.indexOf(p) - 1] ) player.playbackRate(to)
+              }
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
